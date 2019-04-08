@@ -9,23 +9,28 @@ end
 
 
 def repeat (coucou, i=2)
-	return ([coucou] * i).join(" ") 
+	return ([coucou] * i).join(" ") # répétition x 2
 end
 
 
-def start_of_word (string)
-	return 
+def start_of_word(string, i) # i = rang de la lettre dans le mot
+  return string[0,i]
 end
 
 
-def first_word (coucou)
-	return string.split.first
+def first_word (string)
+	return string.split(" ").first # string séparé par espace, seul 1er mot conservé
 end
 
 
-def titleize (sentence)
-  little_words = %w(and the) # définition des petits mots à exclure
-  sentence.capitalize.gsub(/(\w+)/) do |word| # majuscule à toute la phrase, exceptés les mots dans .gsub
-    little_words.include?(word) ? word : word.capitalize # 
+def titleize(string)
+  words = string.split.map do |word| # séparation du string en mots / substrings
+    if %w(the and).include?(word) # définition des little words à exclure
+      word
+    else
+      word.capitalize # sinon mot non contenu dans little words alors majuscule
+    end
   end
+  words.first.capitalize! # majuscules à tous les mots en début de phrase
+  words.join(" ") # pour séparer de nouveau les mots par des espaces
 end
